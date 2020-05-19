@@ -1,0 +1,46 @@
+Protocols - standards like voltage levels in ethernet cables.
+Open Sytems Interconnection(OSI) - one layer for system networking
+OSI levels - Application>>Presentation>>Session>>Transport>>Network>>Data Link>>Physical
+Names of data- Data Link=Frame(defines how messages start and end)>>Network=packet>>Transport=(TCP=segment)&%(UDP=datagram)
+
+TCP/IP layer-only has 4 layers. Network Access>>Internet>>Host-To-Host>>Application
+
+Why is IPV6 preferred over IPV4? 1. Bigger address range -IPV6 uses 128 bit addresses while IPV4 uses 32 bit addresses.
+                                 2. Offer scope and lifetime
+                                 3. Interfaces can have mutliple IPv6 addresses.
+                                 
+Dual-stack configuration - support for both IPv4 and IPv6
+Address - traffic route for internet protocol.
+IPv4 address - is 32 bits long, divided into four 8 bit sections. Runs from 0 to 255.Eg.`192.168.0.1`
+Loopback address - reserved 127.0.0.1 fro establishing connections to self
+IPv6 address - 128 bits long, written as 8 groups of 4 hexadecimals. Eg. fe80:0000:0000:0000:75f4:ac69:5fa7:67f9
+IPv6 loopback address - ::1.
+Link local  address - used by routers to access auto-configuration functions. Never used to send packets.Eg. 169.254.0.0./fe80::/10
+
+Note - Internet protocols can only route packets to IP addresses, not website names. Domain names must be turned into IP addresses before they can be resolved.
+
+Domain Name System(DNS) server - translates domain names to ip address eg Cloudflare, Free DNS
+
+How is a domain name resolved? Computer sends UDP datagram to DNS, asking for AAAAA-type record of the domain. If  exists, this returns IPv6 address.
+                               If it doesn't computer queries for A-type record that returns IPv4 address
+                               
+Local Networks and Address Translation
+Computer and router are on the same local network(Computer IP communicates with Router private IP)>>Router translates and transmits via Router public IP 
+Network Address Translation - translation so packet originating from IPv4 local network can be routed to internet layer.
+                            - router does translation by changing source IP address to router's public IP()
+Note - During NAT, checksums in packet must be updated so no errors will be detected or it will be discarded
+Netmask, subnet mask, CIDR - how router kknows if message is locally deliverable or must be forwarded.
+
+Subnetting and CIDR - partd of IP address are used to determine where message should go
+IPv4 uses masks to determine. Bitwise AND operations are done on IP addresses.
+IPv6 uses CIDR. eg if /112 then router knows this is local address
+
+Unicast - packet routed from one sender to one receiver
+Broadcast - single sender to every recepient at the same time.
+Multicast - single to group
+
+Port - 16 bit integer applications use to send and receive packets computer
+Soocket - abstraction used by applications to send data over the network
+Parts of open socket -Local IP address>>Local Port>> Remote IP address>> Remote port>> UDP or TCP protocol
+Think
+If you use two different browsers to connect to facebook on port 80, computer looks at local IP,port,remote IP,port and protocol 
